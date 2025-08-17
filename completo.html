@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genitori in Giappone❤️</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩️</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛩️</text></svg>">
+
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --card-color: #2c2c2c;
+            --text-color: #e0e0e0;
+            --primary-color: #ff4757;
+            --secondary-color: #3498db;
+            --input-color: #444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        h1 { color: var(--primary-color); }
+        h3 { color: var(--secondary-color); margin-top: 30px; }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        #home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .grid-item {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100px;
+        }
+
+        .grid-item span {
+            display: block;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .back-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        /* Stili Convertitore Valuta */
+        .converter-container { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .converter-row { display: flex; align-items: center; gap: 10px; }
+        .converter-row label { font-size: 2em; width: 40px; }
+        .converter-row input { width: 100%; padding: 15px; background-color: var(--input-color); border: none; border-radius: 8px; color: var(--text-color); font-size: 1.5em; font-weight: bold; }
+        .rate-info { font-size: 0.9em; color: #aaa; text-align: center; margin-top: 20px; }
+        
+        /* Stili Checklist */
+        .checklist-section h3 { color: var(--primary-color); border-bottom: 1px solid var(--primary-color); padding-bottom: 5px; margin-top: 30px; }
+        .checklist-item { background-color: var(--card-color); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; cursor: pointer; }
+        .checklist-item input[type="checkbox"] { width: 20px; height: 20px; margin-right: 15px; accent-color: var(--primary-color); }
+        .checklist-item label { font-size: 1.1em; flex-grow: 1; }
+        .checklist-item.checked label { text-decoration: line-through; color: #888; }
+
+        /* Stili Frasario */
+        .phrase-section h3 { color: var(--primary-color); border-bottom: 1px solid var(--primary-color); padding-bottom: 5px; margin-top: 30px; }
+        .phrase-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .phrase-table td { padding: 12px 5px; border-bottom: 1px solid #444; }
+        .phrase-table .translation { font-weight: bold; font-size: 1.1em; }
+        .phrase-table .pronunciation { color: #ccc; font-style: italic; }
+
+        /* Stili Tabelle Dati (per Taglie) */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .data-table th, .data-table td {
+            padding: 10px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            font-size: 1.1em;
+        }
+        .data-table td {
+            background-color: var(--card-color);
+        }
+/* NUOVI STILI PER IL CALCOLATORE TAX-FREE */
+.calculator-container {
+    padding: 0 10px; /* Un po' di spazio laterale */
+}
+.calculator-container .description {
+    font-size: 0.9em;
+    color: #ccc;
+    text-align: center;
+    line-height: 1.5;
+}
+.calculator-container .input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.calculator-container .input-row label {
+    font-size: 2em;
+    font-weight: bold;
+}
+.calculator-container .input-row input {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--input-color);
+    border: none;
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.result-area {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: var(--card-color);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+/* NUOVI STILI PER LA GUIDA MEZZI */
+.transport-guide {
+    padding: 0 10px;
+}
+.guide-intro {
+    font-size: 0.9em;
+    color: #ccc;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+.line-card {
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 8px solid; /* Bordo colorato per identificare la linea */
+}
+.line-card .line-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.line-card p, .line-card ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.95em;
+    color: #e0e0e0;
+}
+.line-card ul li {
+    margin-bottom: 8px;
+}
+
+/* Colori specifici per le linee */
+.line-card.bus { border-color: #f39c12; /* Arancione */ }
+.line-card.karasuma { border-color: #27ae60; /* Verde */ }
+.line-card.tozai { border-color: #c0392b; /* Rosso */ }
+.line-card.midosuji { border-color: #e74c3c; /* Rosso acceso */ }
+.line-card.loopline { border-color: #bdc3c7; /* Grigio */ }
+
+    </style>
+</head>
+<body>
+
+    <div id="page-home" class="page active">
+        <h1>🇯🇵 Japan Pocket Utility</h1>
+        <div id="home-grid">
+            <div class="grid-item" data-page="page-checklist"><span>✈️</span>Checklist</div>
+            <div class="grid-item" data-page="page-converter"><span>€¥</span>Convertitore</div>
+            <div class="grid-item" data-page="page-phrasebook"><span>🗣️</span>Frasario</div>
+            <div class="grid-item" data-page="page-sizes"><span>👕</span>Taglie</div>
+            <div class="grid-item" data-page="page-taxfree"><span>💸</span>Tax-Free</div>
+            <div class="grid-item" data-page="page-transport"><span>🚇</span>Guida Mezzi</div>
+        </div>
+    </div>
+
+    <div id="page-checklist" class="page">
+        <button class="back-button" data-page="page-home">← Home</button>
+        <h2>Checklist Valigia</h2>
+        <div id="checklist-container"></div>
+    </div>
+
+    <div id="page-converter" class="page">
+        <button class="back-button" data-page="page-home">← Home</button>
+        <h2>Convertitore € ⇄ ¥</h2>
+        <div class="converter-container">
+            <div class="converter-row"><label for="eur">€</label><input type="number" id="eur-input" placeholder="Euro..." ></div>
+            <div class="converter-row"><label for="jpy">¥</label><input type="number" id="jpy-input" placeholder="Yen..." ></div>
+        </div>
+        <p class="rate-info">Tasso di cambio fisso (1€ = 165¥)</p>
+    </div>
+
+    <div id="page-phrasebook" class="page">
+        <button class="back-button" data-page="page-home">← Home</button>
+        <h2>Frasario Essenziale</h2>
+        <div class="phrase-section">
+            <h3>Saluti e Basi</h3>
+            <table class="phrase-table">
+                <tr><td><div class="translation">Sì / No</div><div class="pronunciation">Hai / Iie</div></td></tr>
+                <tr><td><div class="translation">Grazie</div><div class="pronunciation">Arigatò gozaimàs</div></td></tr>
+                <tr><td><div class="translation">Prego</div><div class="pronunciation">Do itashimash'té</div></td></tr>
+                <tr><td><div class="translation">Scusi / Permesso</div><div class="pronunciation">Sumimasèn</div></td></tr>
+                <tr><td><div class="translation">Buongiorno</div><div class="pronunciation">Ohayò gozaimàs</div></td></tr>
+                <tr><td><div class="translation">Buonasera</div><div class="pronunciation">Konbanwa</div></td></tr>
+            </table>
+        </div>
+        <div class="phrase-section">
+            <h3>Al Ristorante</h3>
+            <table class="phrase-table">
+                <tr><td><div class="translation">Quanto costa?</div><div class="pronunciation">Kore wa ìkura des' ka?</div></td></tr>
+                <tr><td><div class="translation">Il conto, per favore</div><div class="pronunciation">O-kaikèi o onegai shimàs</div></td></tr>
+                <tr><td><div class="translation">Acqua, per favore</div><div class="pronunciation">O-mìzu o kudasài</div></td></tr>
+                <tr><td><div class="translation">È delizioso!</div><div class="pronunciation">Oishìi!</div></td></tr>
+                <tr><td><div class="translation">Avete un menu in inglese?</div><div class="pronunciation">Èigo no menyuu arimàs' ka?</div></td></tr>
+            </table>
+        </div>
+        <div class="phrase-section">
+            <h3>Direzioni e Trasporti</h3>
+            <table class="phrase-table">
+                <tr><td><div class="translation">Dov'è la stazione?</div><div class="pronunciation">Èki wa dòko des' ka?</div></td></tr>
+                <tr><td><div class="translation">Dov'è il bagno?</div><div class="pronunciation">Tòire wa dòko des' ka?</div></td></tr>
+            </table>
+        </div>
+    </div>
+    
+    <div id="page-sizes" class="page">
+        <button class="back-button" data-page="page-home">← Home</button>
+        <h2>Convertitore Taglie</h2>
+        <h3>Scarpe</h3>
+        <table class="data-table">
+            <thead><tr><th>Europa</th><th>Giappone (cm)</th></tr></thead>
+            <tbody>
+                <tr><td>38</td><td>24</td></tr>
+                <tr><td>39</td><td>25</td></tr>
+                <tr><td>40</td><td>25.5</td></tr>
+                <tr><td>41</td><td>26</td></tr>
+                <tr><td>42</td><td>26.5</td></tr>
+                <tr><td>43</td><td>27.5</td></tr>
+                <tr><td>44</td><td>28.5</td></tr>
+            </tbody>
+        </table>
+        <h3>Abbigliamento Uomo (T-shirt, Felpe)</h3>
+        <table class="data-table">
+            <thead><tr><th>Europa</th><th>Internazionale</th><th>Giappone</th></tr></thead>
+            <tbody>
+                <tr><td>46</td><td>S</td><td>M</td></tr>
+                <tr><td>48</td><td>M</td><td>L</td></tr>
+                <tr><td>50</td><td>L</td><td>XL (o LL)</td></tr>
+                <tr><td>52</td><td>XL</td><td>XXL (o 3L)</td></tr>
+            </tbody>
+        </table>
+        <p style="text-align: center; font-size: 0.9em; color: #ccc; padding: 0 15px;">Nota: le taglie giapponesi sono spesso più piccole. Considera sempre una taglia in più.</p>
+        <h3>Abbigliamento Donna</h3>
+        <table class="data-table">
+            <thead><tr><th>Europa (IT)</th><th>Internazionale</th><th>Giappone (JP)</th></tr></thead>
+            <tbody>
+                <tr><td>38</td><td>XS</td><td>5 (S)</td></tr>
+                <tr><td>40</td><td>S</td><td>7 (S/M)</td></tr>
+                <tr><td>42</td><td>M</td><td>9 (M)</td></tr>
+                <tr><td>44</td><td>L</td><td>11 (L)</td></tr>
+                <tr><td>46</td><td>XL</td><td>13 (XL)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="page-taxfree" class="page">
+    <button class="back-button" data-page="page-home">← Home</button>
+    <h2>Calcolatore Tax-Free</h2>
+
+    <div class="calculator-container">
+        <p class="description">
+            Inserisci l'importo totale della tua spesa in Yen (¥). La soglia minima è 5.000 ¥. L'imposta (IVA) è del 10%.
+        </p>
+
+        <div class="input-row">
+            <label for="amount">¥</label>
+            <input type="number" id="tax-free-amount" placeholder="Importo spesa...">
+        </div>
+
+        <div id="tax-free-result" class="result-area">
+            Il risultato apparirà qui.
+        </div>
+    </div>
+</div>
+
+    <div id="page-transport" class="page">
+    <button class="back-button" data-page="page-home">← Home</button>
+    <h2>Guida Rapida Mezzi</h2>
+
+    <div class="transport-guide">
+        <h3>Kyoto ⛩️</h3>
+        <p class="guide-intro">
+            A Kyoto, la metropolitana è utile, ma i **bus** sono fondamentali per raggiungere molti templi. La tua IC Card (Suica/Pasmo/Icoca) funziona su entrambi.
+        </p>
+        <div class="line-card bus">
+            <div class="line-name">Bus Principali</div>
+            <ul>
+                <li><strong>Raku Bus (100, 101, 102):</strong> Linee turistiche che collegano le stazioni principali con le maggiori attrazioni (es. Kinkaku-ji, Ginkaku-ji, Kiyomizu-dera).</li>
+                <li><strong>Bus 206:</strong> Fa un anello attorno alla città toccando molti punti importanti.</li>
+            </ul>
+        </div>
+        <div class="line-card karasuma">
+            <div class="line-name">Karasuma Line (Verde)</div>
+            <p>Attraversa la città da nord a sud, passando per la Stazione di Kyoto.</p>
+        </div>
+        <div class="line-card tozai">
+            <div class="line-name">Tozai Line (Rossa)</div>
+            <p>Attraversa la città da est a ovest, utile per il Castello di Nijo e l'area di Gion.</p>
+        </div>
+
+        <h3>Osaka 🐙</h3>
+        <p class="guide-intro">
+            Osaka ha una rete di metro eccellente. Le due linee più importanti per un turista sono la Midosuji Line e la JR Loop Line.
+        </p>
+        <div class="line-card midosuji">
+            <div class="line-name">Midosuji Line (Rossa)</div>
+            <p>È la spina dorsale della città. Collega le zone chiave: Umeda (stazione), Shinsaibashi (shopping), Namba (Dotonbori), e Tennoji (tempio).</p>
+        </div>
+        <div class="line-card loopline">
+            <div class="line-name">JR Osaka Loop Line (Argento/Grigio)</div>
+            <p>Una linea circolare (come la Yamanote a Tokyo) che tocca punti importanti come la Stazione di Osaka/Umeda, il Castello di Osaka (stazione Morinomiya) e Tennoji.</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- LOGICA DI NAVIGAZIONE ---
+            const allPages = document.querySelectorAll('.page');
+            function showPage(pageId) { allPages.forEach(p => p.classList.toggle('active', p.id === pageId)); }
+            document.querySelectorAll('.grid-item, .back-button').forEach(i => i.addEventListener('click', () => showPage(i.getAttribute('data-page'))));
+
+            // --- LOGICA CONVERTITORE VALUTA ---
+            const eurInput = document.getElementById('eur-input');
+            const jpyInput = document.getElementById('jpy-input');
+            const exchangeRate = 165;
+            eurInput.addEventListener('input', () => { const v = parseFloat(eurInput.value); jpyInput.value = isNaN(v) ? '' : (v * exchangeRate).toFixed(0); });
+            jpyInput.addEventListener('input', () => { const v = parseFloat(jpyInput.value); eurInput.value = isNaN(v) ? '' : (v / exchangeRate).toFixed(2); });
+
+            // --- LOGICA CHECKLIST ---
+            const checklistContainer = document.getElementById('checklist-container');
+            const checklistData = {
+                "Documenti Essenziali": ["Passaporto", "Copia Passaporto (digitale)", "Biglietti aerei / QR Code", "Prenotazioni Hotel", "Assicurazione di viaggio", "Qualche Yen", "Carte credito"],
+                "Abbigliamento": ["Magliette / Camicie", "Pantaloni / Gonne", "Intimo e Calzini", "Felpa / Maglione", "Giacca impermeabile", "Pigiama", "Scarpe comode"],
+                "Elettronica": ["Smartphone e caricatore", "Power Bank", "Adattatore di corrente (Tipo A)", "Cuffie", "Fotocamera e batterie extra"],
+                "Igiene e Salute": ["Farmaci personali", "Kit primo soccorso", "Spazzolino e dentifricio", "Articoli da bagno"]
+            };
+            function renderChecklist() {
+                let html = '';
+                for (const category in checklistData) {
+                    html += `<div class="checklist-section"><h3>${category}</h3>`;
+                    checklistData[category].forEach(item => {
+                        const itemId = item.replace(/[\s\(\)]+/g, '-'); // Rende l'id valido per l'HTML
+                        html += `<div class="checklist-item"><input type="checkbox" id="${itemId}" name="${item}"><label for="${itemId}">${item}</label></div>`;
+                    });
+                    html += `</div>`;
+                }
+                checklistContainer.innerHTML = html;
+            }
+            if (checklistContainer) {
+                renderChecklist();
+                checklistContainer.addEventListener('change', (event) => {
+                    if (event.target.type === 'checkbox') {
+                        event.target.parentElement.classList.toggle('checked', event.target.checked);
+                    }
+                });
+            }
+        });
+// --- NUOVA LOGICA PER IL CALCOLATORE TAX-FREE ---
+const taxFreeInput = document.getElementById('tax-free-amount');
+const taxFreeResult = document.getElementById('tax-free-result');
+
+const sogliaMinima = 5000; // 5.000 Yen
+const tassa = 0.10; // 10%
+
+taxFreeInput.addEventListener('input', () => {
+    const amount = parseFloat(taxFreeInput.value);
+
+    if (isNaN(amount) || amount <= 0) {
+        taxFreeResult.innerHTML = "Il risultato apparirà qui.";
+        taxFreeResult.style.color = "#aaa"; // Colore neutro
+        return;
+    }
+
+    if (amount >= sogliaMinima) {
+        const risparmio = amount * tassa;
+        taxFreeResult.innerHTML = `✅ Hai diritto al Tax-Free! Risparmio: ${risparmio.toFixed(0)} ¥`;
+        taxFreeResult.style.color = "#2ecc71"; // Verde successo
+    } else {
+        const rimanente = sogliaMinima - amount;
+        taxFreeResult.innerHTML = `❌ Soglia non raggiunta. Ti mancano ${rimanente.toFixed(0)} ¥`;
+        taxFreeResult.style.color = "#e74c3c"; // Rosso errore
+    }
+});
+    </script>
+
+</body>
+</html>
